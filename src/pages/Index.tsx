@@ -43,9 +43,27 @@ const Index = () => {
                 <Icon name="LogIn" size={24} />
                 Вход в систему
               </CardTitle>
-              <div className="flex items-center justify-center gap-2 mt-3 text-sm text-muted-foreground bg-blue-50/80 px-4 py-2 rounded-lg">
-                <Icon name="Info" size={16} className="text-blue-600" />
-                <span>Используйте учетную запись Windows Active Directory</span>
+              <div className="relative group">
+                <div className="flex items-center justify-center gap-2 mt-3 text-sm text-muted-foreground bg-blue-50/80 px-4 py-2 rounded-lg cursor-help">
+                  <Icon name="Info" size={16} className="text-blue-600" />
+                  <span>Используйте учетную запись Windows Active Directory</span>
+                </div>
+                
+                {/* Tooltip с картинкой */}
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                  <div className="bg-white rounded-lg shadow-2xl border-2 border-gray-200 p-3">
+                    <img 
+                      src="https://cdn.poehali.dev/files/da328068-3f35-4c92-bcec-98d4b394434b.png"
+                      alt="Windows входное окно"
+                      className="w-80 h-auto rounded-lg"
+                    />
+                    <div className="mt-2 text-xs text-gray-600 text-center">
+                      Пример входа через Windows AD
+                    </div>
+                    {/* Стрелка тултипа */}
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-white"></div>
+                  </div>
+                </div>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">

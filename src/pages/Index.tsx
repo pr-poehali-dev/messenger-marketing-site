@@ -47,7 +47,16 @@ const Index = () => {
     setShowDownloadModal(false);
   };
 
-  // Имитация запроса к PostgreSQL БД
+  // Локальная "база данных" учетных данных (для демо)
+  const localUsers = [
+    { LOGIN: 'admin', PASSWORD: 'admin123', name: 'Администратор системы' },
+    { LOGIN: 'doctor1', PASSWORD: 'med2024', name: 'Петров Иван Сергеевич' },
+    { LOGIN: 'nurse2', PASSWORD: 'care456', name: 'Сидорова Анна Викторовна' },
+    { LOGIN: 'manager', PASSWORD: 'mgr789', name: 'Козлов Михаил Петрович' },
+    { LOGIN: 'guest', PASSWORD: 'guest', name: 'Гостевой аккаунт' }
+  ];
+
+  // Обработчик авторизации с локальной проверкой
   const handleLogin = async () => {
     if (!loginData.login || !loginData.password) {
       alert('Пожалуйста, заполните все поля');
@@ -57,23 +66,31 @@ const Index = () => {
     setIsLoading(true);
 
     try {
-      // Имитация запроса к БД pg4.sweb.ru:5433
-      // В реальном приложении здесь будет запрос к API
-      await new Promise(resolve => setTimeout(resolve, 2000)); // Имитация задержки
+      // Имитация задержки сетевого запроса
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
-      // Имитация ответа от сервера - всегда требует 2FA
-      console.log('Отправка данных в PostgreSQL:', {
-        LOGIN: loginData.login,
-        PASSWORD: loginData.password,
-        host: 'pg4.sweb.ru:5433',
-        database: 'AD'
-      });
+      // Поиск пользователя в локальной "БД"
+      const user = localUsers.find(u => 
+        u.LOGIN === loginData.login && u.PASSWORD === loginData.password
+      );
 
-      setIsLoading(false);
-      setShowMandatoryTwoFA(true);
+      if (user) {
+        console.log('✅ Авторизация успешна:', {
+          LOGIN: user.LOGIN,
+          name: user.name,
+          host: 'pg4.sweb.ru:5433',
+          database: 'AD'
+        });
+        
+        setIsLoading(false);
+        setShowMandatoryTwoFA(true);
+      } else {
+        setIsLoading(false);
+        alert('❌ Неверный логин или пароль!\n\nДоступные аккаунты:\n• admin / admin123\n• doctor1 / med2024\n• nurse2 / care456\n• manager / mgr789\n• guest / guest');
+      }
     } catch (error) {
       setIsLoading(false);
-      alert('Ошибка подключения к базе данных');
+      alert('Ошибка подключения к системе');
     }
   };
 
@@ -170,6 +187,28 @@ const Index = () => {
                   'Войти'
                 )}
               </Button>
+              
+              {/* Демо аккаунты */}
+              <div className="mt-4 p-3 bg-blue-50/80 rounded-lg border border-blue-200">
+                <p className="text-xs text-blue-800 font-medium mb-2 flex items-center gap-1">
+                  <Icon name="Users" size={14} />
+                  Демо аккаунты для тестирования:
+                </p>
+                <div className="grid grid-cols-1 gap-1 text-xs text-blue-700">
+                  <div className="flex justify-between">
+                    <span>admin</span>
+                    <span className="font-mono">admin123</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>doctor1</span>
+                    <span className="font-mono">med2024</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>guest</span>
+                    <span className="font-mono">guest</span>
+                  </div>
+                </div>
+              </div>
             </CardContent>
           </Card>
 

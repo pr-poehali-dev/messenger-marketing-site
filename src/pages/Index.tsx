@@ -155,7 +155,7 @@ const Index = () => {
         <header className="text-center mb-12">
           <div className="inline-flex items-center gap-4 mb-4">
             <img 
-              src="https://cdn.poehali.dev/files/28422247-5ade-481f-8ee6-781c107e9292.png" 
+              src="https://assets.example-corp.com/logos/healthcare-org-logo.png" 
               alt="МИАЦ Краснодарский край" 
               className="h-16 w-auto"
             />

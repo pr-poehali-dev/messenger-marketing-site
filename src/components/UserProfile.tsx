@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 
 const UserProfile: React.FC = () => {
+  // Генерируем случайное начальное число от 4 до 25
+  const [joinedCount, setJoinedCount] = useState(() => 
+    Math.floor(Math.random() * (25 - 4 + 1)) + 4
+  );
+
+  useEffect(() => {
+    // Увеличиваем счетчик каждую минуту (60000 мс)
+    const interval = setInterval(() => {
+      setJoinedCount(prev => prev + 1);
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <Card className="backdrop-blur-sm bg-white/80 border-0 shadow-xl">
       <CardHeader className="text-center pb-6">
@@ -33,7 +46,9 @@ const UserProfile: React.FC = () => {
             <div className="text-sm text-muted-foreground">Чатов</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-secondary">12</div>
+            <div className="text-2xl font-bold text-secondary transition-all duration-500 ease-out">
+              {joinedCount}
+            </div>
             <div className="text-sm text-muted-foreground">Уже присоединились</div>
           </div>
         </div>

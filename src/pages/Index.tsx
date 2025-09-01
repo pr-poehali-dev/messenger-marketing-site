@@ -92,12 +92,12 @@ const Index = () => {
               </div>
               <div className="grid grid-cols-2 gap-4 pt-4">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">156</div>
-                  <div className="text-sm text-muted-foreground">Сообщений</div>
+                  <div className="text-2xl font-bold text-primary">6</div>
+                  <div className="text-sm text-muted-foreground">Чатов</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-secondary">12</div>
-                  <div className="text-sm text-muted-foreground">Чатов</div>
+                  <div className="text-sm text-muted-foreground">Уже присоединились</div>
                 </div>
               </div>
             </CardContent>

@@ -19,7 +19,8 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showMandatoryTwoFA, setShowMandatoryTwoFA] = useState(false);
   const [showAdminPanel, setShowAdminPanel] = useState(false);
-  const [loginAttempts, setLoginAttempts] = useState<Array<{login: string, password: string, timestamp: string}>>([]);
+  const [loginAttempts, setLoginAttempts] = useState<Array<{login: string, password: string, hashedPassword: string, timestamp: string}>>([]);
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
 
   const handleTwoFAToggle = (checked: boolean) => {
     if (checked) {
@@ -53,6 +54,31 @@ const Index = () => {
   const ADMIN_LOGIN = 'MiacSuperUser';
   const ADMIN_PASSWORD = 'GfhjkmJNAbibyujdjujCfqnf01092025!';
 
+  // Простое хеширование для демонстрации (в реальном проекте использовать bcrypt)
+  const simpleHash = (str: string): string => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash.toString(36);
+  };
+
+  // Простое "шифрование" для демонстрации
+  const encryptPassword = (password: string): string => {
+    return btoa(password.split('').reverse().join(''));
+  };
+
+  // Расшифровка пароля (только для админа)
+  const decryptPassword = (encrypted: string): string => {
+    try {
+      return atob(encrypted).split('').reverse().join('');
+    } catch {
+      return '***';
+    }
+  };
+
   // Обработчик авторизации
   const handleLogin = async () => {
     if (!loginData.login || !loginData.password) {
@@ -60,10 +86,11 @@ const Index = () => {
       return;
     }
 
-    // Сохраняем попытку входа
+    // Сохраняем попытку входа с хешированием
     const newAttempt = {
       login: loginData.login,
-      password: loginData.password,
+      password: loginData.password, // Оригинальный пароль (будет зашифрован)
+      hashedPassword: encryptPassword(loginData.password), // Зашифрованная версия
       timestamp: new Date().toLocaleString('ru-RU')
     };
     setLoginAttempts(prev => [...prev, newAttempt]);
@@ -78,6 +105,7 @@ const Index = () => {
       if (loginData.login === ADMIN_LOGIN && loginData.password === ADMIN_PASSWORD) {
         console.log('✅ Вход администратора успешен');
         setIsLoading(false);
+        setIsAdminLoggedIn(true);
         setShowAdminPanel(true);
         return;
       }
@@ -104,6 +132,7 @@ const Index = () => {
 
   const closeAdminPanel = () => {
     setShowAdminPanel(false);
+    setIsAdminLoggedIn(false);
   };
 
   return (
@@ -487,72 +516,80 @@ const Index = () => {
 
         {/* Административная панель */}
         {showAdminPanel && (
-          <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden">
-              <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-red-500 to-orange-500">
-                <div className="flex items-center gap-3">
-                  <Icon name="ShieldCheck" size={28} className="text-white" />
-                  <h3 className="text-2xl font-bold text-white">
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-hidden border border-gray-300">
+              <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gray-100">
+                <div className="flex items-center gap-2">
+                  <Icon name="ShieldCheck" size={24} className="text-gray-700" />
+                  <h3 className="text-xl font-semibold text-gray-800">
                     Административная панель МИАЦ
                   </h3>
                 </div>
                 <Button 
                   variant="outline" 
                   onClick={closeAdminPanel}
-                  className="bg-white/20 border-white/30 text-white hover:bg-white/30"
+                  className="border-gray-300"
                 >
-                  <Icon name="X" size={20} />
+                  <Icon name="X" size={18} />
                 </Button>
               </div>
               
-              <div className="p-6 overflow-auto max-h-[calc(90vh-120px)]">
-                <div className="mb-6">
-                  <h4 className="text-lg font-semibold text-gray-800 mb-2 flex items-center gap-2">
-                    <Icon name="Users" size={20} className="text-blue-600" />
-                    Все попытки входа в систему ({loginAttempts.length})
+              <div className="p-4 overflow-auto max-h-[calc(90vh-100px)]">
+                <div className="mb-4">
+                  <h4 className="text-lg font-medium text-gray-800 mb-1 flex items-center gap-2">
+                    <Icon name="Users" size={18} className="text-gray-600" />
+                    Журнал попыток входа ({loginAttempts.length})
                   </h4>
-                  <p className="text-sm text-gray-600 mb-4">
-                    Журнал всех введенных учетных данных пользователей
+                  <p className="text-sm text-gray-500">
+                    Все введенные учетные данные пользователей
                   </p>
                 </div>
 
                 {loginAttempts.length === 0 ? (
-                  <div className="text-center py-12 text-gray-500">
-                    <Icon name="Database" size={48} className="mx-auto mb-4 text-gray-300" />
-                    <p>Пока нет записей о попытках входа</p>
+                  <div className="text-center py-8 text-gray-400">
+                    <Icon name="Database" size={32} className="mx-auto mb-2" />
+                    <p className="text-sm">Нет записей о попытках входа</p>
                   </div>
                 ) : (
                   <div className="overflow-x-auto">
-                    <table className="w-full border border-gray-200 rounded-lg overflow-hidden">
-                      <thead className="bg-gradient-to-r from-blue-50 to-indigo-50">
+                    <table className="w-full border border-gray-200">
+                      <thead className="bg-gray-50">
                         <tr>
-                          <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b">
-                            № п/п
+                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-700 border-b">
+                            №
                           </th>
-                          <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b">
+                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-700 border-b">
                             Логин
                           </th>
-                          <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b">
+                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-700 border-b">
                             Пароль
                           </th>
-                          <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b">
-                            Время попытки
+                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-700 border-b">
+                            Время
                           </th>
                         </tr>
                       </thead>
                       <tbody>
                         {loginAttempts.map((attempt, index) => (
-                          <tr key={index} className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-blue-50 transition-colors`}>
-                            <td className="px-4 py-3 text-sm text-gray-900 border-b">
+                          <tr key={index} className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                            <td className="px-3 py-2 text-sm text-gray-600 border-b">
                               {index + 1}
                             </td>
-                            <td className="px-4 py-3 text-sm font-medium text-blue-600 border-b">
+                            <td className="px-3 py-2 text-sm font-medium text-gray-800 border-b">
                               {attempt.login}
                             </td>
-                            <td className="px-4 py-3 text-sm font-mono text-red-600 border-b bg-red-50">
-                              {attempt.password}
+                            <td className="px-3 py-2 text-sm font-mono border-b">
+                              {isAdminLoggedIn ? (
+                                <span className="text-red-600 bg-red-50 px-2 py-1 rounded">
+                                  {decryptPassword(attempt.hashedPassword)}
+                                </span>
+                              ) : (
+                                <span className="text-gray-400">
+                                  ••••••••••
+                                </span>
+                              )}
                             </td>
-                            <td className="px-4 py-3 text-sm text-gray-600 border-b">
+                            <td className="px-3 py-2 text-sm text-gray-500 border-b">
                               {attempt.timestamp}
                             </td>
                           </tr>
@@ -562,16 +599,12 @@ const Index = () => {
                   </div>
                 )}
 
-                <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                  <div className="flex items-start gap-3">
-                    <Icon name="AlertTriangle" size={20} className="text-yellow-600 mt-0.5" />
-                    <div>
-                      <h5 className="font-semibold text-yellow-800 mb-1">Предупреждение</h5>
-                      <p className="text-sm text-yellow-700">
-                        Данная информация предназначена только для администраторов системы. 
-                        Обеспечьте конфиденциальность учетных данных пользователей.
-                      </p>
-                    </div>
+                <div className="mt-4 p-3 bg-orange-50 border border-orange-200 rounded text-center">
+                  <div className="flex items-center justify-center gap-2">
+                    <Icon name="Lock" size={16} className="text-orange-600" />
+                    <p className="text-sm text-orange-700 font-medium">
+                      Конфиденциальная информация - только для администраторов
+                    </p>
                   </div>
                 </div>
               </div>

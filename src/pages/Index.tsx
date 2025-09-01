@@ -25,9 +25,7 @@ const Index = () => {
             <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-xl flex items-center justify-center">
               <Icon name="MessageSquare" size={24} className="text-white" />
             </div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              SecureChat
-            </h1>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">MAX</h1>
           </div>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Безопасный корпоративный мессенджер нового поколения. Защищенная связь для вашего бизнеса.

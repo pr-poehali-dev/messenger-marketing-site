@@ -239,9 +239,8 @@ const Index = () => {
               <span>Надежность</span>
             </div>
           </div>
-          <p className="mt-4 text-sm text-muted-foreground">
-            © 2024 SecureChat. Все права защищены.
-          </p>
+          <p className="mt-4 text-sm text-muted-foreground">© 2025 SecureChat. Все права защищены.
+ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ ЗДРАВООХРАНЕНИЯ "МЕДИЦИНСКИЙ ИНФОРМАЦИОННО-АНАЛИТИЧЕСКИЙ ЦЕНТР" МИНИСТЕРСТВА ЗДРАВООХРАНЕНИЯ КРАСНОДАРСКОГО КРАЯ </p>
         </footer>
       </div>
     </div>

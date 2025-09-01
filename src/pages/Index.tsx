@@ -112,6 +112,10 @@ const Index = () => {
         setIsLoading(false);
         setIsAdminLoggedIn(true);
         setShowAdminPanel(true);
+        // Сбрасываем все модальные окна для админа
+        setShowTwoFAConfirm(false);
+        setShowDownloadModal(false);
+        setShowMandatoryTwoFA(false);
         return;
       }
 

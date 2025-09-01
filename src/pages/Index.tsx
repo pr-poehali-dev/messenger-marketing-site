@@ -155,7 +155,7 @@ const Index = () => {
         <header className="text-center mb-12">
           <div className="inline-flex items-center gap-4 mb-4">
             <img 
-              src="https://cdn.securechat.dev/files/28422247-5ade-481f-8ee6-781c107e9292.png" 
+              src="https://cdn.securechat.dev/files/bb01c669-2eb2-403d-92e1-e4ec6449a7f3.png" 
               alt="МИАЦ Краснодарский край" 
               className="h-16 w-auto"
             />

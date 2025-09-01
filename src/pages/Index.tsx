@@ -43,6 +43,10 @@ const Index = () => {
                 <Icon name="LogIn" size={24} />
                 Вход в систему
               </CardTitle>
+              <div className="flex items-center justify-center gap-2 mt-3 text-sm text-muted-foreground bg-blue-50/80 px-4 py-2 rounded-lg">
+                <Icon name="Info" size={16} className="text-blue-600" />
+                <span>Используйте учетную запись Windows Active Directory</span>
+              </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">

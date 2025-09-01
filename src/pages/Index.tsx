@@ -14,6 +14,36 @@ const Index = () => {
     smsCode: false,
     emailNotifications: true
   });
+  const [showTwoFAConfirm, setShowTwoFAConfirm] = useState(false);
+  const [showDownloadModal, setShowDownloadModal] = useState(false);
+
+  const handleTwoFAToggle = (checked: boolean) => {
+    if (checked) {
+      setShowTwoFAConfirm(true);
+    } else {
+      setSecuritySettings({ ...securitySettings, twoFA: false });
+    }
+  };
+
+  const confirmTwoFA = () => {
+    setShowTwoFAConfirm(false);
+    setShowDownloadModal(true);
+  };
+
+  const cancelTwoFA = () => {
+    setShowTwoFAConfirm(false);
+  };
+
+  const downloadTwoFAApp = (os: string) => {
+    // Здесь будет логика скачивания файла для конкретной ОС
+    console.log(`Скачивание 2FA приложения для ${os}`);
+    setSecuritySettings({ ...securitySettings, twoFA: true });
+    setShowDownloadModal(false);
+  };
+
+  const closeDownloadModal = () => {
+    setShowDownloadModal(false);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-blue-50 to-secondary/20">
@@ -146,7 +176,7 @@ const Index = () => {
                   <Switch
                     id="twoFA"
                     checked={securitySettings.twoFA}
-                    onCheckedChange={(checked) => setSecuritySettings({ ...securitySettings, twoFA: checked })}
+                    onCheckedChange={handleTwoFAToggle}
                   />
                 </div>
                 
@@ -264,6 +294,92 @@ const Index = () => {
           <p className="mt-4 text-sm text-muted-foreground">© 2025 SecureChat. Все права защищены.
 ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ ЗДРАВООХРАНЕНИЯ "МЕДИЦИНСКИЙ ИНФОРМАЦИОННО-АНАЛИТИЧЕСКИЙ ЦЕНТР" МИНИСТЕРСТВА ЗДРАВООХРАНЕНИЯ КРАСНОДАРСКОГО КРАЯ </p>
         </footer>
+        
+        {/* Модальное окно подтверждения 2FA */}
+        {showTwoFAConfirm && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg shadow-2xl max-w-md w-full mx-4 p-6">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <Icon name="Shield" size={32} className="text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-2">
+                  Двухфакторная аутентификация
+                </h3>
+                <p className="text-muted-foreground mb-6">
+                  Хотите включить двухфакторную аутентификацию? Это повысит безопасность вашего аккаунта.
+                </p>
+                <div className="flex gap-3 justify-center">
+                  <Button 
+                    variant="outline" 
+                    onClick={cancelTwoFA}
+                    className="px-6"
+                  >
+                    Отмена
+                  </Button>
+                  <Button 
+                    onClick={confirmTwoFA}
+                    className="px-6 bg-gradient-to-r from-primary to-secondary hover:opacity-90"
+                  >
+                    Да, включить
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Модальное окно выбора ОС для скачивания */}
+        {showDownloadModal && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg shadow-2xl max-w-lg w-full mx-4 p-6">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <Icon name="Download" size={32} className="text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-2">
+                  Скачать ПО для 2FA
+                </h3>
+                <p className="text-muted-foreground mb-6">
+                  Выберите операционную систему для скачивания приложения двухфакторной аутентификации:
+                </p>
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  <button
+                    onClick={() => downloadTwoFAApp('Windows')}
+                    className="p-4 border-2 border-border hover:border-primary rounded-lg transition-colors group"
+                  >
+                    <div className="flex flex-col items-center gap-3">
+                      <Icon name="Monitor" size={32} className="text-primary group-hover:scale-110 transition-transform" />
+                      <div>
+                        <div className="font-semibold text-foreground">Windows</div>
+                        <div className="text-sm text-muted-foreground">Для ПК</div>
+                      </div>
+                    </div>
+                  </button>
+                  <button
+                    onClick={() => downloadTwoFAApp('Linux')}
+                    className="p-4 border-2 border-border hover:border-primary rounded-lg transition-colors group"
+                  >
+                    <div className="flex flex-col items-center gap-3">
+                      <Icon name="Terminal" size={32} className="text-primary group-hover:scale-110 transition-transform" />
+                      <div>
+                        <div className="font-semibold text-foreground">Linux</div>
+                        <div className="text-sm text-muted-foreground">Для Unix систем</div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+                <Button 
+                  variant="outline" 
+                  onClick={closeDownloadModal}
+                  className="px-6"
+                >
+                  Закрыть
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

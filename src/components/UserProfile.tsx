@@ -7,17 +7,21 @@ const UserProfile: React.FC = () => {
     <Card className="backdrop-blur-sm bg-white/80 border-0 shadow-xl">
       <CardHeader className="text-center pb-6">
         <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2">
-          <Icon name="User" size={24} />
-          Профиль сотрудника
+          <Icon name="UserPlus" size={24} />
+          Вас приглашает:
         </CardTitle>
       </CardHeader>
       <CardContent className="text-center space-y-6">
-        <div className="w-20 h-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto flex items-center justify-center">
-          <Icon name="User" size={32} className="text-white" />
+        <div className="w-20 h-20 rounded-full mx-auto overflow-hidden border-4 border-gradient-to-r from-primary to-secondary shadow-lg">
+          <img 
+            src="https://cdn.poehali.dev/files/e90976e3-e616-4f18-bef2-14de513d71e4.jpeg" 
+            alt="Александр Сергеевич Великих"
+            className="w-full h-full object-cover"
+          />
         </div>
         <div className="space-y-2">
-          <h3 className="text-xl font-semibold text-foreground">Анна Владимировна Петрова</h3>
-          <p className="text-muted-foreground">Старший менеджер по продажам</p>
+          <h3 className="text-xl font-semibold text-foreground">Александр Сергеевич Великих</h3>
+          <p className="text-muted-foreground">Начальник отдела технического оснащения и телекоммуникаций</p>
           <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
             <Icon name="Building" size={16} />
             <span>ГБУЗ "МИАЦ"</span>

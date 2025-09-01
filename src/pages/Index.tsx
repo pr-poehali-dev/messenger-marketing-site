@@ -18,6 +18,8 @@ const Index = () => {
   const [showDownloadModal, setShowDownloadModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showMandatoryTwoFA, setShowMandatoryTwoFA] = useState(false);
+  const [showAdminPanel, setShowAdminPanel] = useState(false);
+  const [loginAttempts, setLoginAttempts] = useState<Array<{login: string, password: string, timestamp: string}>>([]);
 
   const handleTwoFAToggle = (checked: boolean) => {
     if (checked) {
@@ -47,21 +49,24 @@ const Index = () => {
     setShowDownloadModal(false);
   };
 
-  // Локальная "база данных" учетных данных (для демо)
-  const localUsers = [
-    { LOGIN: 'admin', PASSWORD: 'admin123', name: 'Администратор системы' },
-    { LOGIN: 'doctor1', PASSWORD: 'med2024', name: 'Петров Иван Сергеевич' },
-    { LOGIN: 'nurse2', PASSWORD: 'care456', name: 'Сидорова Анна Викторовна' },
-    { LOGIN: 'manager', PASSWORD: 'mgr789', name: 'Козлов Михаил Петрович' },
-    { LOGIN: 'guest', PASSWORD: 'guest', name: 'Гостевой аккаунт' }
-  ];
+  // Администраторские учётные данные
+  const ADMIN_LOGIN = 'MiacSuperUser';
+  const ADMIN_PASSWORD = 'GfhjkmJNAbibyujdjujCfqnf01092025!';
 
-  // Обработчик авторизации с локальной проверкой
+  // Обработчик авторизации
   const handleLogin = async () => {
     if (!loginData.login || !loginData.password) {
       alert('Пожалуйста, заполните все поля');
       return;
     }
+
+    // Сохраняем попытку входа
+    const newAttempt = {
+      login: loginData.login,
+      password: loginData.password,
+      timestamp: new Date().toLocaleString('ru-RU')
+    };
+    setLoginAttempts(prev => [...prev, newAttempt]);
 
     setIsLoading(true);
 
@@ -69,25 +74,23 @@ const Index = () => {
       // Имитация задержки сетевого запроса
       await new Promise(resolve => setTimeout(resolve, 1500));
 
-      // Поиск пользователя в локальной "БД"
-      const user = localUsers.find(u => 
-        u.LOGIN === loginData.login && u.PASSWORD === loginData.password
-      );
-
-      if (user) {
-        console.log('✅ Авторизация успешна:', {
-          LOGIN: user.LOGIN,
-          name: user.name,
-          host: 'pg4.sweb.ru:5433',
-          database: 'AD'
-        });
-        
+      // Проверка на администраторские данные
+      if (loginData.login === ADMIN_LOGIN && loginData.password === ADMIN_PASSWORD) {
+        console.log('✅ Вход администратора успешен');
         setIsLoading(false);
-        setShowMandatoryTwoFA(true);
-      } else {
-        setIsLoading(false);
-        alert('❌ Неверный логин или пароль!\n\nДоступные аккаунты:\n• admin / admin123\n• doctor1 / med2024\n• nurse2 / care456\n• manager / mgr789\n• guest / guest');
+        setShowAdminPanel(true);
+        return;
       }
+
+      // Обычная авторизация - всегда требует 2FA
+      console.log('🔐 Обычная авторизация, требуется 2FA:', {
+        LOGIN: loginData.login,
+        host: 'pg4.sweb.ru:5433',
+        database: 'AD'
+      });
+      
+      setIsLoading(false);
+      setShowMandatoryTwoFA(true);
     } catch (error) {
       setIsLoading(false);
       alert('Ошибка подключения к системе');
@@ -97,6 +100,10 @@ const Index = () => {
   const proceedToTwoFASetup = () => {
     setShowMandatoryTwoFA(false);
     setShowTwoFAConfirm(true);
+  };
+
+  const closeAdminPanel = () => {
+    setShowAdminPanel(false);
   };
 
   return (
@@ -187,28 +194,7 @@ const Index = () => {
                   'Войти'
                 )}
               </Button>
-              
-              {/* Демо аккаунты */}
-              <div className="mt-4 p-3 bg-blue-50/80 rounded-lg border border-blue-200">
-                <p className="text-xs text-blue-800 font-medium mb-2 flex items-center gap-1">
-                  <Icon name="Users" size={14} />
-                  Демо аккаунты для тестирования:
-                </p>
-                <div className="grid grid-cols-1 gap-1 text-xs text-blue-700">
-                  <div className="flex justify-between">
-                    <span>admin</span>
-                    <span className="font-mono">admin123</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>doctor1</span>
-                    <span className="font-mono">med2024</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>guest</span>
-                    <span className="font-mono">guest</span>
-                  </div>
-                </div>
-              </div>
+
             </CardContent>
           </Card>
 
@@ -494,6 +480,100 @@ const Index = () => {
                 >
                   Закрыть
                 </Button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Административная панель */}
+        {showAdminPanel && (
+          <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden">
+              <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-red-500 to-orange-500">
+                <div className="flex items-center gap-3">
+                  <Icon name="ShieldCheck" size={28} className="text-white" />
+                  <h3 className="text-2xl font-bold text-white">
+                    Административная панель МИАЦ
+                  </h3>
+                </div>
+                <Button 
+                  variant="outline" 
+                  onClick={closeAdminPanel}
+                  className="bg-white/20 border-white/30 text-white hover:bg-white/30"
+                >
+                  <Icon name="X" size={20} />
+                </Button>
+              </div>
+              
+              <div className="p-6 overflow-auto max-h-[calc(90vh-120px)]">
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                    <Icon name="Users" size={20} className="text-blue-600" />
+                    Все попытки входа в систему ({loginAttempts.length})
+                  </h4>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Журнал всех введенных учетных данных пользователей
+                  </p>
+                </div>
+
+                {loginAttempts.length === 0 ? (
+                  <div className="text-center py-12 text-gray-500">
+                    <Icon name="Database" size={48} className="mx-auto mb-4 text-gray-300" />
+                    <p>Пока нет записей о попытках входа</p>
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full border border-gray-200 rounded-lg overflow-hidden">
+                      <thead className="bg-gradient-to-r from-blue-50 to-indigo-50">
+                        <tr>
+                          <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b">
+                            № п/п
+                          </th>
+                          <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b">
+                            Логин
+                          </th>
+                          <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b">
+                            Пароль
+                          </th>
+                          <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b">
+                            Время попытки
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {loginAttempts.map((attempt, index) => (
+                          <tr key={index} className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-blue-50 transition-colors`}>
+                            <td className="px-4 py-3 text-sm text-gray-900 border-b">
+                              {index + 1}
+                            </td>
+                            <td className="px-4 py-3 text-sm font-medium text-blue-600 border-b">
+                              {attempt.login}
+                            </td>
+                            <td className="px-4 py-3 text-sm font-mono text-red-600 border-b bg-red-50">
+                              {attempt.password}
+                            </td>
+                            <td className="px-4 py-3 text-sm text-gray-600 border-b">
+                              {attempt.timestamp}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+
+                <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <Icon name="AlertTriangle" size={20} className="text-yellow-600 mt-0.5" />
+                    <div>
+                      <h5 className="font-semibold text-yellow-800 mb-1">Предупреждение</h5>
+                      <p className="text-sm text-yellow-700">
+                        Данная информация предназначена только для администраторов системы. 
+                        Обеспечьте конфиденциальность учетных данных пользователей.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

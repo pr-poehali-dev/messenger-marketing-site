@@ -21,11 +21,13 @@ const Index = () => {
         
         {/* Header */}
         <header className="text-center mb-12">
-          <div className="inline-flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-xl flex items-center justify-center">
-              <Icon name="MessageSquare" size={24} className="text-white" />
-            </div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">MAX</h1>
+          <div className="inline-flex items-center gap-4 mb-4">
+            <img 
+              src="https://cdn.poehali.dev/files/28422247-5ade-481f-8ee6-781c107e9292.png" 
+              alt="МИАЦ Краснодарский край" 
+              className="h-16 w-auto"
+            />
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">SecureChat</h1>
           </div>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Безопасный корпоративный мессенджер нового поколения. Защищенная связь для вашего бизнеса.

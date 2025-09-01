@@ -24,19 +24,19 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({
 }) => {
   return (
     <div className="max-w-4xl mx-auto mt-12">
-      <Card className="backdrop-blur-sm bg-white/80 border-0 shadow-xl">
+      <Card className="backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl">
         <CardHeader className="text-center pb-6">
-          <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2">
+          <CardTitle className="text-2xl font-bold text-white flex items-center justify-center gap-2">
             <Icon name="Shield" size={24} />
             Настройки безопасности
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10">
+            <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-primary/20 to-secondary/20 backdrop-blur-sm border border-white/10">
               <div className="flex items-center gap-3">
                 <Icon name="Smartphone" size={20} />
-                <Label htmlFor="twoFA" className="font-medium">Двухфакторная аутентификация</Label>
+                <Label htmlFor="twoFA" className="font-medium text-gray-200">Двухфакторная аутентификация</Label>
               </div>
               <Switch
                 id="twoFA"
@@ -45,10 +45,10 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({
               />
             </div>
             
-            <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10">
+            <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-primary/20 to-secondary/20 backdrop-blur-sm border border-white/10">
               <div className="flex items-center gap-3">
                 <Icon name="MessageSquare" size={20} />
-                <Label htmlFor="smsCode" className="font-medium">SMS-коды</Label>
+                <Label htmlFor="smsCode" className="font-medium text-gray-200">SMS-коды</Label>
               </div>
               <Switch
                 id="smsCode"
@@ -57,7 +57,7 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({
               />
             </div>
             
-            <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10">
+            <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-primary/20 to-secondary/20 backdrop-blur-sm border border-white/10">
               <div className="flex items-center gap-3">
                 <Icon name="Mail" size={20} />
                 <Label htmlFor="emailNotifications" className="font-medium">Email уведомления</Label>
@@ -74,9 +74,9 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({
 
       {/* FAQ Section */}
       <div className="max-w-4xl mx-auto mt-12">
-        <Card className="backdrop-blur-sm bg-white/80 border-0 shadow-xl">
+        <Card className="backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl">
           <CardHeader className="text-center pb-6">
-            <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2">
+            <CardTitle className="text-2xl font-bold text-white flex items-center justify-center gap-2">
               <Icon name="HelpCircle" size={24} />
               Часто задаваемые вопросы
             </CardTitle>

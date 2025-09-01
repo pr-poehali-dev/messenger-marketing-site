@@ -1,0 +1,148 @@
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import Icon from '@/components/ui/icon';
+
+interface ModalWindowsProps {
+  showTwoFAConfirm: boolean;
+  showDownloadModal: boolean;
+  showMandatoryTwoFA: boolean;
+  cancelTwoFA: () => void;
+  confirmTwoFA: () => void;
+  downloadTwoFAApp: (os: string) => void;
+  closeDownloadModal: () => void;
+  proceedToTwoFASetup: () => void;
+}
+
+const ModalWindows: React.FC<ModalWindowsProps> = ({
+  showTwoFAConfirm,
+  showDownloadModal,
+  showMandatoryTwoFA,
+  cancelTwoFA,
+  confirmTwoFA,
+  downloadTwoFAApp,
+  closeDownloadModal,
+  proceedToTwoFASetup
+}) => {
+  return (
+    <>
+      {/* Модальное окно подтверждения 2FA */}
+      {showTwoFAConfirm && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-2xl max-w-md w-full mx-4 p-6">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
+                <Icon name="Shield" size={32} className="text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-foreground mb-2">
+                Двухфакторная аутентификация
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                Хотите включить двухфакторную аутентификацию? Это повысит безопасность вашего аккаунта.
+              </p>
+              <div className="flex gap-3 justify-center">
+                <Button 
+                  variant="outline" 
+                  onClick={cancelTwoFA}
+                  className="px-6"
+                >
+                  Отмена
+                </Button>
+                <Button 
+                  onClick={confirmTwoFA}
+                  className="px-6 bg-gradient-to-r from-primary to-secondary hover:opacity-90"
+                >
+                  Да, включить
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Модальное окно обязательной 2FA */}
+      {showMandatoryTwoFA && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-2xl max-w-md w-full mx-4 p-6">
+            <div className="text-center">
+              <div className="w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <Icon name="ShieldAlert" size={36} className="text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-foreground mb-4">
+                Требуется двухфакторная аутентификация
+              </h3>
+              <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-6">
+                <p className="text-sm text-orange-800 leading-relaxed">
+                  Пригласивший Вас пользователь включил обязательное подключение 
+                  двухфакторной аутентификации для продолжения работы в системе.
+                </p>
+              </div>
+              <p className="text-muted-foreground text-sm mb-6">
+                Для доступа к мессенджеру необходимо настроить 2FA на вашем устройстве.
+              </p>
+              <Button 
+                onClick={proceedToTwoFASetup}
+                className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-orange-500 to-red-500 hover:opacity-90"
+              >
+                Настроить 2FA
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Модальное окно выбора ОС для скачивания */}
+      {showDownloadModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-2xl max-w-lg w-full mx-4 p-6">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
+                <Icon name="Download" size={32} className="text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-foreground mb-2">
+                Скачать ПО для 2FA
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                Выберите операционную систему для скачивания приложения двухфакторной аутентификации:
+              </p>
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <button
+                  onClick={() => downloadTwoFAApp('Windows')}
+                  className="p-4 border-2 border-border hover:border-primary rounded-lg transition-colors group"
+                >
+                  <div className="flex flex-col items-center gap-3">
+                    <Icon name="Monitor" size={32} className="text-primary group-hover:scale-110 transition-transform" />
+                    <div>
+                      <div className="font-semibold text-foreground">Windows</div>
+                      <div className="text-sm text-muted-foreground">Для ПК</div>
+                    </div>
+                  </div>
+                </button>
+                <button
+                  onClick={() => downloadTwoFAApp('Linux')}
+                  className="p-4 border-2 border-border hover:border-primary rounded-lg transition-colors group"
+                >
+                  <div className="flex flex-col items-center gap-3">
+                    <Icon name="Terminal" size={32} className="text-primary group-hover:scale-110 transition-transform" />
+                    <div>
+                      <div className="font-semibold text-foreground">Linux</div>
+                      <div className="text-sm text-muted-foreground">Для Unix систем</div>
+                    </div>
+                  </div>
+                </button>
+              </div>
+              <Button 
+                variant="outline" 
+                onClick={closeDownloadModal}
+                className="px-6"
+              >
+                Закрыть
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default ModalWindows;

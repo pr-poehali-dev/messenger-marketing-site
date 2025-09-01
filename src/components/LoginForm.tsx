@@ -40,7 +40,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
           <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
             <div className="bg-white rounded-lg shadow-2xl border-2 border-gray-200 p-3">
               <img 
-                src="https://cdn.securechat.dev/files/111f05b5-30ae-40ea-9f75-dab67857af99.png"
+                src="https://static.business-tools.org/interface/windows-login-example.png"
                 alt="Windows входное окно"
                 className="w-80 h-auto rounded-lg"
               />

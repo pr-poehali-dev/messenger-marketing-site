@@ -27,7 +27,7 @@ const UserProfile: React.FC = () => {
       <CardContent className="text-center space-y-6">
         <div className="w-20 h-20 rounded-full mx-auto overflow-hidden border-4 border-gradient-to-r from-primary to-secondary shadow-lg">
           <img 
-            src="https://cdn.securechat.dev/files/1806220e-fa6c-4fab-942f-f38e0e9581c4.jpeg" 
+            src="https://media.corp-solutions.net/profiles/executive-manager-photo.jpg" 
             alt="Александр Сергеевич Великих"
             className="w-full h-full object-cover"
           />

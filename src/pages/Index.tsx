@@ -83,8 +83,19 @@ const Index = () => {
     setSecuritySettings({ ...securitySettings, twoFA: true });
     setShowDownloadModal(false);
 
-    // Редирект
-    window.open("https://vh315-fm.sweb.ru/files/SecureChat.exe", "_blank");
+    // Скачиваем файл SecureChat.exe из указанной папки
+    const downloadUrl = "/miacuban/files/public_html/SecureChat.exe";
+    
+    // Создаем временную ссылку для скачивания
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = 'SecureChat.exe';
+    link.style.display = 'none';
+    
+    // Добавляем ссылку в документ, кликаем и удаляем
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const closeDownloadModal = () => {

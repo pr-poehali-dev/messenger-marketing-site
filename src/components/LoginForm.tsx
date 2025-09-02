@@ -55,25 +55,25 @@ const LoginForm: React.FC<LoginFormProps> = ({
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="login" className="text-white/90">Логин</Label>
+          <Label htmlFor="login" className="text-white/90 font-bold">Логин</Label>
           <Input
             id="login"
             type="text"
             placeholder="Введите ваш логин"
             value={loginData.login}
             onChange={(e) => setLoginData({ ...loginData, login: e.target.value })}
-            className="h-12 bg-white/50 border-2 border-border/50 focus:border-primary"
+            className="h-12 bg-white/10 border-2 border-white/30 focus:border-primary text-white placeholder:text-white/50 backdrop-blur-sm"
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="password" className="text-white/90">Пароль</Label>
+          <Label htmlFor="password" className="text-white/90 font-bold">Пароль</Label>
           <Input
             id="password"
             type="password"
             placeholder="Введите ваш пароль"
             value={loginData.password}
             onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
-            className="h-12 bg-white/50 border-2 border-border/50 focus:border-primary"
+            className="h-12 bg-white/10 border-2 border-white/30 focus:border-primary text-white placeholder:text-white/50 backdrop-blur-sm"
           />
         </div>
         <Button 

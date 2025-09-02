@@ -99,11 +99,11 @@
     @apply text-white;
     background: linear-gradient(
       -45deg,
+      #021540,
+      #001122,
       #000511,
       #001122,
-      #001833,
-      #001122,
-      #000511
+      #021540
     );
     background-size: 400% 400%;
     animation: gradient 20s ease infinite;

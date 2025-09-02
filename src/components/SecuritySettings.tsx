@@ -24,9 +24,9 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({
 }) => {
   return (
     <div className="max-w-4xl mx-auto mt-12">
-      <Card className="backdrop-blur-sm bg-white/80 border-0 shadow-xl">
+      <Card className="backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl">
         <CardHeader className="text-center pb-6">
-          <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2">
+          <CardTitle className="text-2xl font-bold text-white flex items-center justify-center gap-2">
             <Icon name="Shield" size={24} />
             Настройки безопасности
           </CardTitle>

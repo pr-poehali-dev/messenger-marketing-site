@@ -42,14 +42,14 @@ const UserProfile: React.FC = () => {
         </div>
         <div className="grid grid-cols-2 gap-4 pt-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-primary">6</div>
+            <div className="text-2xl font-bold bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent">6</div>
             <div className="text-sm text-white/60">Чатов</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-secondary transition-all duration-500 ease-out">
+            <div className="text-2xl font-bold bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent transition-all duration-500 ease-out">
               {joinedCount}
             </div>
-            <div className="text-sm text-muted-foreground">Уже присоединились</div>
+            <div className="text-sm text-white/60">Уже присоединились</div>
           </div>
         </div>
       </CardContent>

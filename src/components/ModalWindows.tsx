@@ -93,9 +93,9 @@ const ModalWindows: React.FC<ModalWindowsProps> = ({
       {/* Модальное окно выбора ОС для скачивания */}
       {showDownloadModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-2xl max-w-lg w-full mx-4 p-6">
+          <div className="rounded-lg shadow-2xl max-w-lg w-full mx-4 p-6 bg-[#26262636]">
             <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
+              <div className="w-16 h-16 from-primary to-secondary rounded-full mx-auto mb-4 flex items-center justify-center bg-[#00000000]">
                 <Icon name="Download" size={32} className="text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-2">
@@ -105,23 +105,23 @@ const ModalWindows: React.FC<ModalWindowsProps> = ({
                 Выберите операционную систему для скачивания приложения двухфакторной аутентификации:
               </p>
               <div className="grid grid-cols-2 gap-4 mb-6">
-                <button
+                <button className="p-4 border-2 border-white/30 hover:border-primary rounded-lg transition-colors group hover:bg-white/10 bg-[#212121e0]"
                   onClick={() => downloadTwoFAApp('Windows')}
                   className="p-4 border-2 border-white/30 hover:border-primary rounded-lg transition-colors group bg-white/5 hover:bg-white/10"
                 >
                   <div className="flex flex-col items-center gap-3">
                     <Icon name="Monitor" size={32} className="text-primary group-hover:scale-110 transition-transform" />
-                    <div className="rounded-lg shadow-2xl max-w-lg w-full mx-4 p-6 bg-[#151414]">
+                    <div className="rounded-lg shadow-2xl max-w-lg w-full mx-4 p-6 bg-[#14131300]">
                       <div className="font-semibold text-white">Windows</div>
                       <div className="text-sm text-white/60">Для ПК</div>
                     </div>
                   </div>
                 </button>
-                <button
+                <button className="p-4 border-2 border-white/30 hover:border-primary rounded-lg transition-colors group hover:bg-white/10 bg-[#2e2e2e9e]"
                   onClick={() => downloadTwoFAApp('Linux')}
                   className="p-4 border-2 border-white/30 hover:border-primary rounded-lg transition-colors group bg-white/5 hover:bg-white/10"
                 >
-                  <div className="flex flex-col items-center gap-3">
+                  <div className="flex flex-col items-center gap-3 bg-[#00000000]">
                     <Icon name="Terminal" size={32} className="text-primary group-hover:scale-110 transition-transform" />
                     <div>
                       <div className="font-semibold text-white">Linux</div>

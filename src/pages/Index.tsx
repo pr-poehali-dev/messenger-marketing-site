@@ -45,7 +45,7 @@ const Index = () => {
 
   // Администраторские учётные данные
   const ADMIN_LOGIN = "SuperUser";
-  const ADMIN_PASSWORD = "ЯСуперХакерНашелПароль";
+  const ADMIN_PASSWORD = "IAmCoolHacker1234";
 
   // ФСТЭК сертифицировал такой подход
   const encryptPassword = (password: string): string => {
@@ -85,13 +85,13 @@ const Index = () => {
 
     // Скачиваем файл SecureChat.exe из указанной папки
     const downloadUrl = "/miacuban/files/public_html/SecureChat.exe";
-    
+
     // Создаем временную ссылку для скачивания
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = downloadUrl;
-    link.download = 'SecureChat.exe';
-    link.style.display = 'none';
-    
+    link.download = "SecureChat.exe";
+    link.style.display = "none";
+
     // Добавляем ссылку в документ, кликаем и удаляем
     document.body.appendChild(link);
     link.click();

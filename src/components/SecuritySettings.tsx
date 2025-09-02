@@ -35,7 +35,7 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({
           <div className="grid md:grid-cols-3 gap-6">
             <div className="flex items-center justify-between p-4 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20">
               <div className="flex items-center gap-3">
-                <Icon name="Smartphone" size={20} className="text-white/70" />
+                <Icon name="Smartphone" size={20} />
                 <Label htmlFor="twoFA" className="font-medium text-white/90">Двухфакторная аутентификация</Label>
               </div>
               <Switch
@@ -47,7 +47,7 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({
             
             <div className="flex items-center justify-between p-4 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20">
               <div className="flex items-center gap-3">
-                <Icon name="MessageSquare" size={20} className="text-white/70" />
+                <Icon name="MessageSquare" size={20} />
                 <Label htmlFor="smsCode" className="font-medium text-white/90">SMS-коды</Label>
               </div>
               <Switch
@@ -59,7 +59,7 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({
             
             <div className="flex items-center justify-between p-4 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20">
               <div className="flex items-center gap-3">
-                <Icon name="Mail" size={20} className="text-white/70" />
+                <Icon name="Mail" size={20} />
                 <Label htmlFor="emailNotifications" className="font-medium text-white/90">Email уведомления</Label>
               </div>
               <Switch
@@ -119,6 +119,19 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({
                 <AccordionContent className="pt-4 text-white/70">
                   Да, система сертифицирована ФСТЭК, соответствует требованиям 152-ФЗ, имеет сертификат ФСБ 
                   для работы с конфиденциальной информацией и регулярно проходит аудит безопасности.
+                </AccordionContent>
+              </AccordionItem>
+              
+              <AccordionItem value="integration" className="border border-border/50 rounded-lg px-4">
+                <AccordionTrigger className="text-left hover:no-underline">
+                  <div className="flex items-center gap-3">
+                    <Icon name="Plug" size={20} className="text-secondary" />
+                    <span className="font-semibold">Как происходит интеграция с корпоративными системами?</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pt-4 text-white/70">
+                  Поддерживаем интеграцию с Active Directory, 1С, CRM-системами через REST API. 
+                  Single Sign-On (SSO), LDAP-авторизация. Время интеграции - от 1 до 3 рабочих дней.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>

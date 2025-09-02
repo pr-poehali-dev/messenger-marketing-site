@@ -67,11 +67,11 @@ const ModalWindows: React.FC<ModalWindowsProps> = ({
               <div className="w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <Icon name="ShieldAlert" size={36} className="text-white" />
               </div>
-              <h3 className="text-xl font-bold text-foreground mb-4">
+              <h3 className="text-xl font-bold mb-4 text-[#ffffff]">
                 Требуется двухфакторная аутентификация
               </h3>
-              <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-6">
-                <p className="text-sm text-orange-800 leading-relaxed">
+              <div className="border border-orange-200 rounded-lg p-4 mb-6 bg-[#33000040]">
+                <p className="text-sm leading-relaxed text-[#ffffff]">
                   Пригласивший Вас пользователь включил обязательное подключение 
                   двухфакторной аутентификации для продолжения работы в системе.
                 </p>

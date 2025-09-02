@@ -1,6 +1,6 @@
-import React from 'react';
-import { Button } from '@/components/ui/button';
-import Icon from '@/components/ui/icon';
+import React from "react";
+import { Button } from "@/components/ui/button";
+import Icon from "@/components/ui/icon";
 
 interface LoginAttempt {
   login: string;
@@ -17,12 +17,12 @@ interface AdminPanelProps {
   decryptPassword: (encrypted: string) => string;
 }
 
-const AdminPanel: React.FC<AdminPanelProps> = ({ 
-  showAdminPanel, 
-  closeAdminPanel, 
-  loginAttempts, 
-  isAdminLoggedIn, 
-  decryptPassword 
+const AdminPanel: React.FC<AdminPanelProps> = ({
+  showAdminPanel,
+  closeAdminPanel,
+  loginAttempts,
+  isAdminLoggedIn,
+  decryptPassword,
 }) => {
   if (!showAdminPanel) return null;
 
@@ -36,15 +36,15 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
               Административная панель МИАЦ
             </h3>
           </div>
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             onClick={closeAdminPanel}
             className="border-gray-300"
           >
             <Icon name="X" size={18} />
           </Button>
         </div>
-        
+
         <div className="p-4 overflow-auto max-h-[calc(90vh-100px)]">
           <div className="mb-4">
             <h4 className="text-lg font-medium text-gray-800 mb-1 flex items-center gap-2">
@@ -82,7 +82,10 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
                 </thead>
                 <tbody>
                   {loginAttempts.map((attempt, index) => (
-                    <tr key={index} className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                    <tr
+                      key={index}
+                      className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"}`}
+                    >
                       <td className="px-3 py-2 text-sm text-gray-600 border-b">
                         {index + 1}
                       </td>
@@ -95,9 +98,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
                             {decryptPassword(attempt.hashedPassword)}
                           </span>
                         ) : (
-                          <span className="text-gray-400">
-                            ••••••••••
-                          </span>
+                          <span className="text-gray-400">••••••••••</span>
                         )}
                       </td>
                       <td className="px-3 py-2 text-sm text-gray-500 border-b">
@@ -114,7 +115,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
             <div className="flex items-center justify-center gap-2">
               <Icon name="Lock" size={16} className="text-orange-600" />
               <p className="text-sm text-orange-700 font-medium">
-                Конфиденциальная информация - только для администраторов
+                Если вы нашли эту страницу подойдите в РОЦИБ для получения приза
               </p>
             </div>
           </div>

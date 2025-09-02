@@ -160,7 +160,7 @@ const Index = () => {
         <header className="text-center mb-12">
           <div className="inline-flex items-center gap-4 mb-4">
             <img
-              src="https://cdn.poehali.dev/files/28422247-5ade-481f-8ee6-781c107e9292.png"
+              src="/img/8f67e7e0-434a-4ce8-b661-06103edbfda3.jpg"
               alt="МИАЦ Краснодарский край"
               className="h-16 w-auto"
             />

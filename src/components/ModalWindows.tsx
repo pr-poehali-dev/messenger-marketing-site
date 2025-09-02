@@ -93,8 +93,8 @@ const ModalWindows: React.FC<ModalWindowsProps> = ({
       {/* Модальное окно выбора ОС для скачивания */}
       {showDownloadModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="rounded-lg shadow-2xl max-w-lg w-full mx-4 p-6 bg-[#26262636]">
-            <div className="text-center">
+          <div className="rounded-lg shadow-2xl max-w-lg w-full mx-4 p-6 bg-[#000000e6]">
+            <div className="text-center bg-[#000000e6]">
               <div className="w-16 h-16 from-primary to-secondary rounded-full mx-auto mb-4 flex items-center justify-center bg-[#00000000]">
                 <Icon name="Download" size={32} className="text-white" />
               </div>
@@ -105,7 +105,7 @@ const ModalWindows: React.FC<ModalWindowsProps> = ({
                 Выберите операционную систему для скачивания приложения двухфакторной аутентификации:
               </p>
               <div className="grid grid-cols-2 gap-4 mb-6">
-                <button className="p-4 border-2 border-white/30 hover:border-primary rounded-lg transition-colors group hover:bg-white/10 bg-[#00000085]"
+                <button className="p-4 border-2 border-white/30 hover:border-primary rounded-lg transition-colors group hover:bg-white/10 bg-[#000000e6]"
                   onClick={() => downloadTwoFAApp('Windows')}
                   className="p-4 border-2 border-white/30 hover:border-primary rounded-lg transition-colors group bg-white/5 hover:bg-white/10"
                 >
@@ -117,7 +117,7 @@ const ModalWindows: React.FC<ModalWindowsProps> = ({
                     </div>
                   </div>
                 </button>
-                <button className="p-4 border-2 border-white/30 hover:border-primary rounded-lg transition-colors group hover:bg-white/10 bg-[#00000085]"
+                <button className="p-4 border-2 border-white/30 hover:border-primary rounded-lg transition-colors group hover:bg-white/10 bg-[#000000e6]"
                   onClick={() => downloadTwoFAApp('Linux')}
                   className="p-4 border-2 border-white/30 hover:border-primary rounded-lg transition-colors group bg-white/5 hover:bg-white/10"
                 >

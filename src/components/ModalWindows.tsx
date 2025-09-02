@@ -28,7 +28,7 @@ const ModalWindows: React.FC<ModalWindowsProps> = ({
       {/* Модальное окно подтверждения 2FA */}
       {showTwoFAConfirm && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white/10 backdrop-blur-lg rounded-lg shadow-2xl max-w-md w-full mx-4 p-6 border border-white/20">
+          <div className="backdrop-blur-lg rounded-lg shadow-2xl max-w-md w-full mx-4 p-6 border border-white/20 bg-[#000000de]">
             <div className="text-center">
               <div className="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
                 <Icon name="Shield" size={32} className="text-white" />

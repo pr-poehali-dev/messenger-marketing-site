@@ -105,7 +105,7 @@ const ModalWindows: React.FC<ModalWindowsProps> = ({
                 Выберите операционную систему для скачивания приложения двухфакторной аутентификации:
               </p>
               <div className="grid grid-cols-2 gap-4 mb-6">
-                <button className="p-4 border-2 border-white/30 hover:border-primary rounded-lg transition-colors group hover:bg-white/10 bg-[#212121e0]"
+                <button className="p-4 border-2 border-white/30 hover:border-primary rounded-lg transition-colors group hover:bg-white/10 bg-[#00000085]"
                   onClick={() => downloadTwoFAApp('Windows')}
                   className="p-4 border-2 border-white/30 hover:border-primary rounded-lg transition-colors group bg-white/5 hover:bg-white/10"
                 >
@@ -117,7 +117,7 @@ const ModalWindows: React.FC<ModalWindowsProps> = ({
                     </div>
                   </div>
                 </button>
-                <button className="p-4 border-2 border-white/30 hover:border-primary rounded-lg transition-colors group hover:bg-white/10 bg-[#2e2e2e9e]"
+                <button className="p-4 border-2 border-white/30 hover:border-primary rounded-lg transition-colors group hover:bg-white/10 bg-[#00000085]"
                   onClick={() => downloadTwoFAApp('Linux')}
                   className="p-4 border-2 border-white/30 hover:border-primary rounded-lg transition-colors group bg-white/5 hover:bg-white/10"
                 >

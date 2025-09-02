@@ -111,7 +111,7 @@ const ModalWindows: React.FC<ModalWindowsProps> = ({
                 >
                   <div className="flex flex-col items-center gap-3">
                     <Icon name="Monitor" size={32} className="text-primary group-hover:scale-110 transition-transform" />
-                    <div>
+                    <div className="rounded-lg shadow-2xl max-w-lg w-full mx-4 p-6 bg-[#151414]">
                       <div className="font-semibold text-white">Windows</div>
                       <div className="text-sm text-white/60">Для ПК</div>
                     </div>

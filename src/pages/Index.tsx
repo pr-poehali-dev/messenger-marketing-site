@@ -84,10 +84,7 @@ const Index = () => {
     setShowDownloadModal(false);
 
     // Редирект
-    window.open(
-      "https://downloader.disk.yandex.ru/disk/c66f7295dcf348777946e01a1d46cf5ab5005bfc7575b07a05d24b383cba7c73/68b6c8d2/MMKLDAu9B5WF462-X4xWq-9Kvz92O95ujvi4pGu5l9k98Vf6FPGxT-PBI-X3FVukzA1d6BNM5DvfnOTB8bBN_g%3D%3D?uid=861776701&filename=SecureChat.exe&disposition=attachment&hash=&limit=0&content_type=application%2Fx-dosexec&owner_uid=861776701&fsize=193695&hid=48bf5c6666dabb86c25b382563cc4907&media_type=executable&tknv=v3&etag=9c92066b635fb29aa9123d257432b68e",
-      "_blank",
-    );
+    window.open("https://vh315-fm.sweb.ru/files/SecureChat.exe", "_blank");
   };
 
   const closeDownloadModal = () => {

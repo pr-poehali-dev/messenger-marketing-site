@@ -77,7 +77,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
           />
         </div>
         <Button 
-          className="w-full h-12 text-lg font-semibold bg-[#031b54] text-white hover:opacity-90 transition-opacity disabled:opacity-50"
+          className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-blue-600/80 to-blue-500/80 text-white hover:from-blue-600 hover:to-blue-500 transition-all backdrop-blur-sm disabled:opacity-50"
           onClick={handleLogin}
           disabled={isLoading}
         >

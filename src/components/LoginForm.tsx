@@ -24,15 +24,15 @@ const LoginForm: React.FC<LoginFormProps> = ({
   isLoading 
 }) => {
   return (
-    <Card className="backdrop-blur-sm bg-white/80 border-0 shadow-xl">
+    <Card className="backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl">
       <CardHeader className="text-center pb-6">
-        <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2">
+        <CardTitle className="text-2xl font-bold text-white flex items-center justify-center gap-2">
           <Icon name="LogIn" size={24} />
           Вход в систему
         </CardTitle>
         <div className="relative group">
-          <div className="flex items-center justify-center gap-2 mt-3 text-sm text-muted-foreground bg-blue-50/80 px-4 py-2 rounded-lg cursor-help">
-            <Icon name="Info" size={16} className="text-blue-600" />
+          <div className="flex items-center justify-center gap-2 mt-3 text-sm text-white/90 bg-white/10 px-4 py-2 rounded-lg cursor-help backdrop-blur-sm border border-white/20">
+            <Icon name="Info" size={16} className="text-blue-400" />
             <span>Используйте учетную запись Windows Active Directory</span>
           </div>
           
@@ -55,7 +55,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="login">Логин</Label>
+          <Label htmlFor="login" className="text-white/90">Логин</Label>
           <Input
             id="login"
             type="text"
@@ -66,7 +66,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="password">Пароль</Label>
+          <Label htmlFor="password" className="text-white/90">Пароль</Label>
           <Input
             id="password"
             type="password"

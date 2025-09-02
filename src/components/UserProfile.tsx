@@ -17,9 +17,9 @@ const UserProfile: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <Card className="backdrop-blur-sm bg-white/80 border-0 shadow-xl">
+    <Card className="backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl">
       <CardHeader className="text-center pb-6">
-        <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2">
+        <CardTitle className="text-2xl font-bold text-white flex items-center justify-center gap-2">
           <Icon name="UserPlus" size={24} />
           Вас приглашает:
         </CardTitle>
@@ -33,9 +33,9 @@ const UserProfile: React.FC = () => {
           />
         </div>
         <div className="space-y-2">
-          <h3 className="text-xl font-semibold text-foreground">Александр Сергеевич Великих</h3>
-          <p className="text-muted-foreground">Начальник отдела технического оснащения и телекоммуникаций</p>
-          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+          <h3 className="text-xl font-semibold text-white">Александр Сергеевич Великих</h3>
+          <p className="text-white/70">Начальник отдела технического оснащения и телекоммуникаций</p>
+          <div className="flex items-center justify-center gap-2 text-sm text-white/60">
             <Icon name="Building" size={16} />
             <span>ГБУЗ "МИАЦ"</span>
           </div>
@@ -43,7 +43,7 @@ const UserProfile: React.FC = () => {
         <div className="grid grid-cols-2 gap-4 pt-4">
           <div className="text-center">
             <div className="text-2xl font-bold text-primary">6</div>
-            <div className="text-sm text-muted-foreground">Чатов</div>
+            <div className="text-sm text-white/60">Чатов</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-secondary transition-all duration-500 ease-out">

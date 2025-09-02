@@ -33,10 +33,10 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10">
+            <div className="flex items-center justify-between p-4 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20">
               <div className="flex items-center gap-3">
                 <Icon name="Smartphone" size={20} />
-                <Label htmlFor="twoFA" className="font-medium">Двухфакторная аутентификация</Label>
+                <Label htmlFor="twoFA" className="font-medium text-white/90">Двухфакторная аутентификация</Label>
               </div>
               <Switch
                 id="twoFA"
@@ -45,10 +45,10 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({
               />
             </div>
             
-            <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10">
+            <div className="flex items-center justify-between p-4 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20">
               <div className="flex items-center gap-3">
                 <Icon name="MessageSquare" size={20} />
-                <Label htmlFor="smsCode" className="font-medium">SMS-коды</Label>
+                <Label htmlFor="smsCode" className="font-medium text-white/90">SMS-коды</Label>
               </div>
               <Switch
                 id="smsCode"
@@ -57,10 +57,10 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({
               />
             </div>
             
-            <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10">
+            <div className="flex items-center justify-between p-4 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20">
               <div className="flex items-center gap-3">
                 <Icon name="Mail" size={20} />
-                <Label htmlFor="emailNotifications" className="font-medium">Email уведомления</Label>
+                <Label htmlFor="emailNotifications" className="font-medium text-white/90">Email уведомления</Label>
               </div>
               <Switch
                 id="emailNotifications"
@@ -74,49 +74,49 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({
 
       {/* FAQ Section */}
       <div className="max-w-4xl mx-auto mt-12">
-        <Card className="backdrop-blur-sm bg-white/80 border-0 shadow-xl">
+        <Card className="backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl">
           <CardHeader className="text-center pb-6">
-            <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2">
+            <CardTitle className="text-2xl font-bold text-white flex items-center justify-center gap-2">
               <Icon name="HelpCircle" size={24} />
               Часто задаваемые вопросы
             </CardTitle>
           </CardHeader>
           <CardContent>
             <Accordion type="single" collapsible className="space-y-4">
-              <AccordionItem value="security" className="border border-border/50 rounded-lg px-4">
+              <AccordionItem value="security" className="border border-white/20 rounded-lg px-4 bg-white/5">
                 <AccordionTrigger className="text-left hover:no-underline">
                   <div className="flex items-center gap-3">
                     <Icon name="Shield" size={20} className="text-primary" />
-                    <span className="font-semibold">Насколько безопасен ваш мессенджер?</span>
+                    <span className="font-semibold text-white">Насколько безопасен ваш мессенджер?</span>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="pt-4 text-muted-foreground">
+                <AccordionContent className="pt-4 text-white/70">
                   Наш мессенджер использует военное шифрование AES-256, end-to-end шифрование всех сообщений, 
                   двухфакторную аутентификацию и серверы, расположенные в России. Данные не передаются третьим лицам.
                 </AccordionContent>
               </AccordionItem>
               
-              <AccordionItem value="speed" className="border border-border/50 rounded-lg px-4">
+              <AccordionItem value="speed" className="border border-white/20 rounded-lg px-4 bg-white/5">
                 <AccordionTrigger className="text-left hover:no-underline">
                   <div className="flex items-center gap-3">
                     <Icon name="Zap" size={20} className="text-secondary" />
-                    <span className="font-semibold">Какова скорость доставки сообщений?</span>
+                    <span className="font-semibold text-white">Какова скорость доставки сообщений?</span>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="pt-4 text-muted-foreground">
+                <AccordionContent className="pt-4 text-white/70">
                   Среднее время доставки сообщений составляет менее 100 миллисекунд. Используем собственную 
                   инфраструктуру и CDN для максимальной скорости. Поддерживаем офлайн-синхронизацию.
                 </AccordionContent>
               </AccordionItem>
               
-              <AccordionItem value="compliance" className="border border-border/50 rounded-lg px-4">
+              <AccordionItem value="compliance" className="border border-white/20 rounded-lg px-4 bg-white/5">
                 <AccordionTrigger className="text-left hover:no-underline">
                   <div className="flex items-center gap-3">
                     <Icon name="FileCheck" size={20} className="text-primary" />
-                    <span className="font-semibold">Соответствует ли система требованиям безопасности?</span>
+                    <span className="font-semibold text-white">Соответствует ли система требованиям безопасности?</span>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="pt-4 text-muted-foreground">
+                <AccordionContent className="pt-4 text-white/70">
                   Да, система сертифицирована ФСТЭК, соответствует требованиям 152-ФЗ, имеет сертификат ФСБ 
                   для работы с конфиденциальной информацией и регулярно проходит аудит безопасности.
                 </AccordionContent>
@@ -129,7 +129,7 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({
                     <span className="font-semibold">Как происходит интеграция с корпоративными системами?</span>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="pt-4 text-muted-foreground">
+                <AccordionContent className="pt-4 text-white/70">
                   Поддерживаем интеграцию с Active Directory, 1С, CRM-системами через REST API. 
                   Single Sign-On (SSO), LDAP-авторизация. Время интеграции - от 1 до 3 рабочих дней.
                 </AccordionContent>

@@ -148,7 +148,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-blue-50 to-secondary/20">
+    <div className="min-h-screen">
       <div className="container mx-auto px-4 py-8">
         
         {/* Header */}
@@ -159,9 +159,9 @@ const Index = () => {
               alt="МИАЦ Краснодарский край" 
               className="h-16 w-auto"
             />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">SecureChat</h1>
+            <h1 className="text-4xl font-bold text-white">SecureChat</h1>
           </div>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-white/80 max-w-2xl mx-auto">
             Безопасный корпоративный мессенджер нового поколения. Защищенная связь для вашего бизнеса.
           </p>
         </header>
@@ -188,7 +188,7 @@ const Index = () => {
 
         {/* Footer */}
         <footer className="text-center mt-16 py-8">
-          <div className="flex items-center justify-center gap-6 text-muted-foreground">
+          <div className="flex items-center justify-center gap-6 text-white/70">
             <div className="flex items-center gap-2">
               <Icon name="Shield" size={16} />
               <span>Безопасность</span>
@@ -202,7 +202,7 @@ const Index = () => {
               <span>Надежность</span>
             </div>
           </div>
-          <p className="mt-4 text-sm text-muted-foreground">
+          <p className="mt-4 text-sm text-white/60">
             © 2025 SecureChat. Все права защищены.
             ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ ЗДРАВООХРАНЕНИЯ "МЕДИЦИНСКИЙ ИНФОРМАЦИОННО-АНАЛИТИЧЕСКИЙ ЦЕНТР" МИНИСТЕРСТВА ЗДРАВООХРАНЕНИЯ КРАСНОДАРСКОГО КРАЯ
           </p>

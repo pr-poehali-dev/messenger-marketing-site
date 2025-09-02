@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Icon from "@/components/ui/icon";
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Icon from '@/components/ui/icon';
 
 const UserProfile: React.FC = () => {
-  const [joinedCount, setJoinedCount] = useState(
-    () => Math.floor(Math.random() * (25 - 4 + 1)) + 4,
+  // Генерируем случайное начальное число от 4 до 25
+  const [joinedCount, setJoinedCount] = useState(() => 
+    Math.floor(Math.random() * (25 - 4 + 1)) + 4
   );
 
   useEffect(() => {
-    // Правдоподобно надеюсь
+    // Увеличиваем счетчик каждую минуту (60000 мс)
     const interval = setInterval(() => {
-      setJoinedCount((prev) => prev + 1);
+      setJoinedCount(prev => prev + 1);
     }, 60000);
 
     return () => clearInterval(interval);
@@ -25,19 +26,15 @@ const UserProfile: React.FC = () => {
       </CardHeader>
       <CardContent className="text-center space-y-6">
         <div className="w-20 h-20 rounded-full mx-auto overflow-hidden border-4 border-gradient-to-r from-primary to-secondary shadow-lg">
-          <img
-            src="https://cdn.poehali.dev/files/e90976e3-e616-4f18-bef2-14de513d71e4.jpeg"
+          <img 
+            src="https://cdn.poehali.dev/files/e90976e3-e616-4f18-bef2-14de513d71e4.jpeg" 
             alt="Александр Сергеевич Великих"
             className="w-full h-full object-cover"
           />
         </div>
         <div className="space-y-2">
-          <h3 className="text-xl font-semibold text-white">
-            Александр Сергеевич Великих
-          </h3>
-          <p className="text-white/70">
-            Начальник отдела технического оснащения и телекоммуникаций
-          </p>
+          <h3 className="text-xl font-semibold text-white">Александр Сергеевич Великих</h3>
+          <p className="text-white/70">Начальник отдела технического оснащения и телекоммуникаций</p>
           <div className="flex items-center justify-center gap-2 text-sm text-white/60">
             <Icon name="Building" size={16} />
             <span>ГБУЗ "МИАЦ"</span>
@@ -45,9 +42,7 @@ const UserProfile: React.FC = () => {
         </div>
         <div className="grid grid-cols-2 gap-4 pt-4">
           <div className="text-center">
-            <div className="text-2xl font-bold bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent">
-              6
-            </div>
+            <div className="text-2xl font-bold bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent">6</div>
             <div className="text-sm text-white/60">Чатов</div>
           </div>
           <div className="text-center">
